@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Study Companion | Dashboard</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="min-h-screen">
+
+        <!-- Mobile Overlay -->
+        <div id="overlay" class="fixed inset-0 bg-slate-900/40 z-40 hidden md:hidden"></div>
+
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="fixed top-0 left-0 z-50 h-screen w-64 bg-white border-r border-slate-200
+                   flex flex-col sidebar-transition -translate-x-full md:translate-x-0">
+
+            <!-- Logo -->
+            <div class="px-6 py-6 flex items-center gap-3 border-b border-slate-100">
+
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white text-xl">
+                    🎓
+                </div>
+
+                <div>
+                    <h1 class="font-bold text-lg tracking-tight">Study Companion</h1>
+                    <p class="text-xs text-slate-400">AI Learning Platform</p>
+                </div>
+
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 px-4 py-6">
+
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
+                    Workspace
+                </p>
+
+                <div class="space-y-2">
+
+                    <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                        <span>▦</span> Dashboard
+                    </a>
+
+                    <a href="#tutor" class="nav-link" data-section="tutor">
+                        <span>🤖</span> AI Tutor
+                    </a>
+
+                    <a href="#materials" class="nav-link" data-section="materials">
+                        <span>📚</span> Study Materials
+                    </a>
+
+                    <a href="#notes" class="nav-link" data-section="notes">
+                        <span>📝</span> AI Notes
+                    </a>
+
+                    <a href="#quiz" class="nav-link" data-section="quiz">
+                        <span>📋</span> Quiz Generator
+                    </a>
+
+                    <a href="#progress" class="nav-link" data-section="progress">
+                        <span>📊</span> My Progress
+                    </a>
+
+                </div>
+
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mt-9 mb-3">
+                    General
+                </p>
+
+                <div class="space-y-2">
+
+                    <a href="#settings" class="nav-link" data-section="settings">
+                        <span>⚙️</span> Settings
+                    </a>
+
+                    <a href="#help" class="nav-link" data-section="help">
+                        <span>❓</span> Help & Support
+                    </a>
+
+                </div>
+
+            </nav>
+
+            <!-- Sidebar Bottom -->
+            <div class="p-4 border-t border-slate-100">
+
+                <div class="bg-blue-50 rounded-xl p-4">
+                    <p class="text-sm font-semibold text-blue-900">
+                        Keep learning!
+                    </p>
+
+                    <p class="text-xs text-blue-700 mt-1">
+                        Your next study session is waiting.
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-3 mt-5 px-2">
+
+                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-700
+                                flex items-center justify-center font-bold">
+                        S
+                    </div>
+
+                    <div>
+                        <p class="text-sm font-semibold">Student</p>
+                        <p class="text-xs text-slate-400">Learner account</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="md:ml-64 min-h-screen">
+
+            <!-- Top Navbar -->
+            <header class="bg-white border-b border-slate-200 px-5 md:px-8 py-4
+                           flex items-center justify-between sticky top-0 z-30">
+
+                <div class="flex items-center gap-4">
+
+                    <button id="menuBtn"
+                        class="md:hidden text-2xl p-2 rounded-lg hover:bg-slate-100"
+                        aria-label="Open navigation">
+                        ☰
+                    </button>
+
+                    <div>
+                        <p class="text-sm text-slate-400">Workspace / Dashboard</p>
+                        <h2 class="font-semibold text-lg">Dashboard</h2>
+                    </div>
+
+                </div>
+
+                <div class="flex items-center gap-3">
+
+                    <button class="w-10 h-10 rounded-full hover:bg-slate-100"
+                        aria-label="Notifications">
+                        🔔
+                    </button>
+
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white
+                                flex items-center justify-center font-semibold">
+                        S
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- Dashboard Content -->
+            <div id="dashboard" class="p-5 md:p-8 max-w-7xl mx-auto">
+
+                <!-- Welcome Section -->
+                <section class="mb-8 flex flex-col md:flex-row md:items-center
+                                md:justify-between gap-5">
+
+                    <div>
+                        <p id="greeting" class="text-slate-500 mb-2">
+                            Welcome back!
+                        </p>
+
+                        <h1 class="text-3xl font-bold text-slate-900">
+                            Hello, Student 👋
+                        </h1>
+
+                        <p class="text-slate-500 mt-2">
+                            Ready to make today productive?
+                        </p>
+                    </div>
+
+                    <button id="startLearning"
+                        class="bg-blue-600 hover:bg-blue-700 text-white
+                               px-6 py-3 rounded-xl font-semibold shadow-sm">
+                        Start Learning →
+                    </button>
+
+                </section>
+
+
+                <!-- Statistics -->
+                <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+
+                    <div class="stat-card">
+                        <div class="flex justify-between items-center">
+                            <p class="text-slate-500 text-sm">Study Hours</p>
+                            <span class="stat-icon bg-blue-100">⏱️</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mt-4">12.5 hrs</h3>
+                        <p class="text-xs text-slate-400 mt-2">Sample weekly activity</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="flex justify-between items-center">
+                            <p class="text-slate-500 text-sm">Study Materials</p>
+                            <span class="stat-icon bg-purple-100">📚</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mt-4">08</h3>
+                        <p class="text-xs text-slate-400 mt-2">Sample uploaded files</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="flex justify-between items-center">
+                            <p class="text-slate-500 text-sm">Quizzes Completed</p>
+                            <span class="stat-icon bg-green-100">📋</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mt-4">15</h3>
+                        <p class="text-xs text-slate-400 mt-2">Sample quiz activity</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="flex justify-between items-center">
+                            <p class="text-slate-500 text-sm">Average Score</p>
+                            <span class="stat-icon bg-orange-100">🎯</span>
+                        </div>
+                        <h3 class="text-3xl font-bold mt-4">85%</h3>
+                        <p class="text-xs text-slate-400 mt-2">Sample quiz performance</p>
+                    </div>
+
+                </section>
+
+
+                <!-- Main Grid -->
+                <section class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+
+                    <!-- AI Learning Card -->
+                    <div id="tutor"
+                        class="xl:col-span-2 bg-gradient-to-r from-blue-600 to-indigo-600
+                               rounded-2xl p-7 md:p-9 text-white shadow-sm">
+
+                        <div class="flex flex-col md:flex-row justify-between gap-6">
+
+                            <div class="max-w-lg">
+
+                                <span class="text-xs bg-white/20 px-3 py-1 rounded-full">
+                                    YOUR AI LEARNING ASSISTANT
+                                </span>
+
+                                <h2 class="text-3xl font-bold mt-5">
+                                    Learn smarter with AI
+                                </h2>
+
+                                <p class="text-blue-100 mt-3 leading-relaxed">
+                                    Ask questions, understand difficult concepts,
+                                    and get personalized explanations with your AI tutor.
+                                </p>
+
+                                <button id="askTutor"
+                                    class="mt-6 bg-white text-blue-700 hover:bg-blue-50
+                                           px-6 py-3 rounded-xl font-semibold">
+                                    Ask AI Tutor →
+                                </button>
+
+                            </div>
+
+                            <div class="text-7xl self-center md:self-start">
+                                🤖
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Quick Actions -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+                        <h2 class="font-bold text-lg mb-5">Quick Actions</h2>
+
+                        <div class="space-y-4">
+
+                            <button class="quick-action" data-target="materials">
+                                <span class="quick-icon bg-blue-100">📤</span>
+                                <span>
+                                    <strong>Upload PDF</strong>
+                                    <small>Add study materials</small>
+                                </span>
+                                <span class="ml-auto">→</span>
+                            </button>
+
+                            <button class="quick-action" data-target="notes">
+                                <span class="quick-icon bg-purple-100">📝</span>
+                                <span>
+                                    <strong>Generate Notes</strong>
+                                    <small>Create study summaries</small>
+                                </span>
+                                <span class="ml-auto">→</span>
+                            </button>
+
+                            <button class="quick-action" data-target="quiz">
+                                <span class="quick-icon bg-green-100">📋</span>
+                                <span>
+                                    <strong>Create Quiz</strong>
+                                    <small>Test your knowledge</small>
+                                </span>
+                                <span class="ml-auto">→</span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Bottom Grid -->
+                <section class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+
+                    <!-- Recent Activity -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="font-bold text-lg">Recent Activity</h2>
+                            <span class="text-sm text-blue-600">Overview</span>
+                        </div>
+
+                        <div class="space-y-5">
+
+                            <div class="activity-item">
+                                <div class="activity-icon bg-blue-100">📄</div>
+                                <div class="flex-1">
+                                    <p class="font-semibold text-sm">DBMS Notes</p>
+                                    <p class="text-xs text-slate-400 mt-1">Study material • Sample entry</p>
+                                </div>
+                                <span class="text-xs text-slate-400">PDF</span>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon bg-green-100">🧠</div>
+                                <div class="flex-1">
+                                    <p class="font-semibold text-sm">Java Programming Quiz</p>
+                                    <p class="text-xs text-slate-400 mt-1">Quiz completed • Sample entry</p>
+                                </div>
+                                <span class="text-xs text-green-600 font-semibold">85%</span>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon bg-purple-100">📝</div>
+                                <div class="flex-1">
+                                    <p class="font-semibold text-sm">Operating Systems Summary</p>
+                                    <p class="text-xs text-slate-400 mt-1">AI notes • Sample entry</p>
+                                </div>
+                                <span class="text-xs text-slate-400">Notes</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Learning Progress -->
+                    <div id="progress"
+                        class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+                        <h2 class="font-bold text-lg mb-6">Learning Progress</h2>
+
+                        <div class="mb-6">
+
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium">Java Programming</span>
+                                <span class="text-sm text-blue-600">85%</span>
+                            </div>
+
+                            <div class="progress-track">
+                                <div class="progress-fill bg-blue-600" style="width:85%"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-6">
+
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium">Database Management</span>
+                                <span class="text-sm text-purple-600">70%</span>
+                            </div>
+
+                            <div class="progress-track">
+                                <div class="progress-fill bg-purple-600" style="width:70%"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-6">
+
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium">Operating Systems</span>
+                                <span class="text-sm text-green-600">60%</span>
+                            </div>
+
+                            <div class="progress-track">
+                                <div class="progress-fill bg-green-600" style="width:60%"></div>
+                            </div>
+
+                        </div>
+
+                        <p class="text-xs text-slate-400 mt-5">
+                            Sample progress data. Real tracking will be added later.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Future Features -->
+                <section class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+
+                    <div id="materials" class="feature-card">
+                        <div class="text-3xl mb-3">📚</div>
+                        <h3 class="font-bold">Study Materials</h3>
+                        <p class="text-sm text-slate-500 mt-2">
+                            Upload and organize your learning documents.
+                        </p>
+                        <span class="feature-status">Coming in next phase</span>
+                    </div>
+
+                    <div id="notes" class="feature-card">
+                        <div class="text-3xl mb-3">📝</div>
+                        <h3 class="font-bold">AI Notes</h3>
+                        <p class="text-sm text-slate-500 mt-2">
+                            Generate summaries from your study documents.
+                        </p>
+                        <span class="feature-status">Coming in next phase</span>
+                    </div>
+
+                    <div id="quiz" class="feature-card">
+                        <div class="text-3xl mb-3">🧠</div>
+                        <h3 class="font-bold">Quiz Generator</h3>
+                        <p class="text-sm text-slate-500 mt-2">
+                            Practice with AI-generated questions.
+                        </p>
+                        <span class="feature-status">Coming in next phase</span>
+                    </div>
+
+                </section>
+
+
+                <!-- Footer -->
+                <footer class="text-center text-sm text-slate-400 py-8">
+                    © 2026 AI Study Companion. Built for smarter learning.
+                </footer>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
